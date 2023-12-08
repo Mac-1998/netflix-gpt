@@ -9,7 +9,7 @@ import {
 import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
-import { USER_AVATAR } from "../utils/constants";
+import { BACKGROUD_IMG, USER_AVATAR } from "../utils/constants";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -60,7 +60,6 @@ const Login = () => {
               setErrorMessage(error.message);
             });
           const user = userCredential.user;
-          console.log(user);
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -77,8 +76,6 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log(user);
-          // ...
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -92,11 +89,7 @@ const Login = () => {
     <div>
       <Header />
       <div className="absolute">
-        <img
-          className="brightness-50"
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/b4c7f092-0488-48b7-854d-ca055a84fb4f/5b22968d-b94f-44ec-bea3-45dcf457f29e/IN-en-20231204-popsignuptwoweeks-perspective_alpha_website_large.jpg"
-          alt="background"
-        />
+        <img className="brightness-50" src={BACKGROUD_IMG} alt="background" />
       </div>
       <form className="w-3/12 absolute bg-black m-36 mx-auto right-0 left-0 p-16 rounded-md bg-opacity-80">
         <h1 className="font-semi  bold text-white text-4xl mb-8">
