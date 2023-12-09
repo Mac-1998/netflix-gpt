@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { addUser, removeUser } from "../utils/userSlice";
 import { LOGO, SUPPORTED_LANGUAGES } from "../utils/constants";
-import { toggleGptSearch } from "../utils/gptSlice";
+import { addGptMoviesResult, toggleGptSearch } from "../utils/gptSlice";
 import { changeLanguage } from "../utils/configSlice";
 
 const Header = () => {
@@ -48,6 +48,7 @@ const Header = () => {
 
   const handleGptSearchClick = () => {
     disPatch(toggleGptSearch());
+    disPatch(addGptMoviesResult({ movieNames: null, movieResults: null }));
   };
 
   const handleLanguageChange = (e) => {
@@ -55,10 +56,10 @@ const Header = () => {
   };
 
   return (
-    <div className="absolute w-full px-8 bg-gradient-to-b from-[rgba(0,0,0,.5)] z-10 flex justify-between items-center">
+    <div className="absolute w-full px-8 bg-gradient-to-b from-[rgba(0,0,0,.5)] z-10 flex flex-col md:flex-row justify-between items-center">
       <img className="w-52" src={LOGO} alt="logo" />
       {user && (
-        <div className="flex">
+        <div className="flex items-center">
           {showGptSearch && (
             <select
               className="focus:outline-none p-2 bg-gray-900 text-white rounded-md"
@@ -77,7 +78,7 @@ const Header = () => {
           )}
           <button
             onClick={handleGptSearchClick}
-            className="text-white mx-4 bg-purple-800 py-2 px-4 rounded-md"
+            className="text-white mx-4 bg-purple-800 py-1 px-2 md:py-2 md:px-4 rounded-md"
           >
             {!showGptSearch ? "GPT Search" : "Home Page"}
           </button>
